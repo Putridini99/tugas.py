@@ -8,7 +8,7 @@ abjad = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R'
 #abjad berfungsi untuk menampung nilai abjad yang ada
 
 #fungsi enkripsi dengan parameter abjad
-def enkripsi(abjad):
+def enkripsi(abjad): # membuat fungsi yang bertujuan untuk menerapkan caesar cipher
     kalimat = input("Kalimat : ") #input kalimat yang akan di enkripsi
     key = int(input("Key : ")) #kunci untuk pergeseran abjad (enkripsi)
 
