@@ -1,68 +1,25 @@
-print("......................+ Progam Enkripsi Caesar +......................")
-abjad = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+abjad = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-#fungsi enkripsi dengan parameter abjad
-def enkripsi(abjad):
-    str = input("String : ")
-    key = int(input("Key : "))
+key = int(input('Masukkan cipher key yang anda inginkan (misal 7): '))
 
-    str = str.upper()
-    hasil = ''
+def encode(kalimat,cipher_key):
+  kalimat = kalimat.lower()
+  hasil_encode = ''
+  for karakter in kalimat:
+    if karakter in abjad:
+      index_lama = abjad.index(karakter)
+      index_baru = (index_lama + cipher_key ) % len(abjad)
+      abjad_baru = abjad[index_baru]
+      hasil_encode = hasil_encode + abjad_baru 
+    else:
+       hasil_encode = hasil_encode + ' ' 
+  return hasil_encode
 
-    for char in str:
-      if char in abjad:
-        n = abjad.index(char)
-        encrypt = (n - key) % 26
-        convert = abjad[encrypt]
-        hasil = hasil + convert
-      else:
-          hasil = hasil + ' '
-
-    print(f"Hasil : {hasil}")
-
-#fungsi dekripsi dengan parameter abjad
-def dekripsi(abjad):
-    str = input("String Enkripsi : ")
-    key = int(input("Key : "))
-
-    str = str.upper()
-    hasil = ''
-
-    for char in str:
-        if char in abjad:
-          n = abjad.index(char)
-          encrypt = (n + key) % 26
-          convert = abjad[encrypt]
-          hasil = hasil + convert
-        else:
-            hasil = hasil + ' '
-
-    print(f"Hasil : {hasil}")
-
-#menampilkan menu
-pilihan = 'y'
-
-while (pilihan == 'y'):
-  print("Pilihan Menu : ")
-  print("1. Enkripsi Data")
-  print("2. Dekripsi Data")
-  print("3. Exit")
-
-  menu = input("Menu yang tersedia : ")
-  print("...................................")
-
-  if menu == '1':
-    print("Menu Enkripsi Data")
-    enkripsi(abjad)
-  elif menu == '2':
-    print("Menu Dekripsi Data")
-    dekripsi(abjad)
-  elif menu == '3':
-    print("Progam Selesai, terima kasih")
-    break
-  else:
-    print("Menu tidak ditemukan")
-
-  print("...................................")
-  pilihan = input("Apakah anda ingin melanjutkan ? (y/n) : ")
-  print("...................................")
+kalimat = input('Masukkan kalimat yang ingin dienkripsi ')
+# ENKRIPSI
+kalimat_hasil = encode(kalimat,key)
+print('Kalimat yang dimasukkan adalah : ',kalimat)
+print('Hasil enkripsi kalimat menggunakan Caesar Cipher dengan key:',key, 'adalah', kalimat_hasil)
+# DEKRIPSI (dengan enkripsi ulang menggunakan nilai minus key)
+kalimat_awal = encode(kalimat_hasil,-key)
+print('Jika hasil dienkripsi ulang menggunakan nilai negatif dari cipher key sebelumnya maka kalimat hasilnya adalah:',-key, 'adalah', kalimat_awal)
